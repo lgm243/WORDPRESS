@@ -1,0 +1,183 @@
+textarea{
+    color:lighten($noir, 40%);
+    border:2px solid #e0e0e0;
+    font-size: 0.9em;
+    padding:7px 6px 7px 15px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+    width: 100%;
+    background-color: #fefefe;
+    border-radius: 0px;
+color:lighten($noir, 40%);
+   line-height: 16px;
+   font-size: 13px;
+   transition: all .9s;
+   outline: none;
+   &.okinput{
+    border-color:#6FBB6F
+   }
+   &.errorinput{
+    border-color: #c65353
+    }
+   }
+
+
+
+
+input[type="submit"]{
+    text-transform: uppercase;
+    padding:0;
+    border:1px solid  $vert;
+    background-color: white;
+    color: $vert;
+    cursor: pointer;
+    width:120px;
+    line-height: 40px;
+    height: 40px;
+    transition: all 0.9s;
+    font-size: 14px;
+    border-radius: 0px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    outline: none;
+    &:hover{
+        background-color:$vert;
+        color:white;
+    }
+}
+.loi{
+    color:#CCC9C9;
+    font-style: italic;
+    font-size: 11px;
+    text-align: justify;
+    display: block;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+textarea{
+    height:180px;
+}
+.noty{
+    color:white;
+    margin-top: 2px;
+    text-align: center;
+    transition:all 0.5s ease;
+    &.success{
+        background-color: #6FBB6F;
+        padding: 9px 0;
+    }
+    &.error{
+        background-color: #c65353;
+        padding: 9px 0;
+    }
+
+}
+.contact-page{
+    text-align: center;
+    img{
+        margin: 30px auto;
+    }
+    span{
+        margin:8px 0;
+        display: block;
+        color: $bleu;
+        font-weight: bold;
+    }
+}
+.infos_contact{
+    span{
+        display: block;
+        text-align: center;
+        margin:10px 0;
+        font-size: 14px;
+        &:first-child{
+            margin-top: 20px;
+        }
+    }
+}
+#map-canvas{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    color:$noir;
+    strong{
+    font-weight: bold;
+    }
+}
+
+#map-canvas iframe,
+#map-canvas object,
+#map-canvas embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.field{
+   position: relative;
+   height: 72px;
+   padding: 16px 0 8px 0;
+}
+
+.field-label{
+   position: relative;
+   margin: 0;
+   display: block;
+    text-align: left;
+   color:  #bfbfbf;
+   line-height: 16px;
+   font-size: 13px;
+   font-weight: 400;
+   transform: translateY(24px);
+   transition: transform 0.3s, color 0.3s;
+   transform-origin: 0 50%;
+}
+.field-input{
+   position: relative;
+   display: block;
+   width: 100%;
+   height: 32px;
+   padding: 8px 0;
+   line-height: 16px;
+   font-size: 13px;
+   background: transparent;
+   border: none;
+  color:lighten($noir, 40%);
+   -webkit-appearance: none;
+   outline: none;
+}
+.field::after, .field::before{
+   content:'';
+   height: 2px;
+   width: 100%;
+   position: absolute;
+   bottom: 6px;
+   left: 0;
+   background-color: #E0E0E0;
+}
+ .field.errorinput::before{
+
+   background-color: #c65353;
+}
+
+ .field.okinput::before, .field.has-label::before{
+   background-color: #6FBB6F;
+}
+.field::after{
+   background-color: #8cbb8c;
+   transform: scaleX(0);
+   transition: transform 0.3s;
+}
+.has-label .field-label{
+   transform: translateY(0) scale(0.75);
+}
+
+.is-focused .field-label{
+   color: #6FBB6F;
+}
+.field.is-focused::after{
+   transform: scaleX(1);
+}

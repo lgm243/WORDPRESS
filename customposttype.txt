@@ -1,0 +1,126 @@
+<?php
+add_action('init', 'projet_module');
+function projet_module()
+{
+  $labels = array(
+    'name' => _x('Hotesses', 'post type general name'),
+    'singular_name' => _x('Hotesse', 'post type singular name'),
+    'add_new' => _x('Ajouter', 'Hotesse'),
+    'add_new_item' => __('Ajouter un Hotesse'),
+    'edit_item' => __('Modifier Hotesse'),
+    'new_item' => __('Nouveau Hotesse'),
+    'view_item' => __('Voir Hotesse'),
+    'search_items' => __('Rechercher un Hotesse'),
+    'not_found' =>  __('Aucun Hotesse trouvé'),
+    'not_found_in_trash' => __('Aucun Hotesse trouvé in Trash'),
+    'parent_item_colon' => ''
+  );
+  $args = array(
+        'public' => true,
+        'publicly_queryable' => true,
+        'show_ui' => true,
+        'show_in_nav_menus' => false,
+        'exclude_from_search' => false,
+        'query_var' => true,
+        'labels' => $labels,
+        'menu_position' => 14,
+        'capability_type' => 'post',
+        'rewrite' => array( 'slug' => 'hotesse-accueil'),
+        'supports' => array('title','thumbnail')
+  );
+register_post_type('hotesses',$args);
+}
+create_type_taxonomies();
+function create_type_taxonomies()
+{
+  //LIEUX
+  $labels = array(
+    'name' => _x( 'Disponibilité', 'taxonomy general name' ),
+    'singular_name' => _x( 'Disponibilité', 'taxonomy singular name' ),
+    'search_items' =>  __( 'Rechercher Disponibilité' ),
+    'all_items' => __( 'Tous les Disponibilité' ),
+    'parent_item' => __( 'Parent Disponibilité' ),
+    'parent_item_colon' => __( 'Parent Disponibilité:' ),
+    'edit_item' => __( 'Modifier Disponibilité' ),
+    'update_item' => __( 'Mise à jour Disponibilité' ),
+    'add_new_item' => __( 'Ajouter Disponibilité' ),
+    'new_item_name' => __( 'Ajouter Disponibilité' ),
+'menu_name' => __('Disponibilité'),
+  );
+register_taxonomy('disponibilites', array('hotesses'), array(
+    'hierarchical' => true,
+    'public' => true,
+    'publicly_queryable' => true,
+    'labels' => $labels,
+    'show_in_nav_menus' => true,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'disponibilites' ),
+  ));
+}
+create_type_langues();
+function create_type_langues()
+{
+  //LIEUX
+  $labels = array(
+    'name' => _x( 'Langues', 'taxonomy general name' ),
+    'singular_name' => _x( 'Langues', 'taxonomy singular name' ),
+    'search_items' =>  __( 'Rechercher Langues' ),
+    'all_items' => __( 'Tous les Langues' ),
+    'parent_item' => __( 'Parent Langues' ),
+    'parent_item_colon' => __( 'Parent Langues:' ),
+    'edit_item' => __( 'Modifier Langues' ),
+    'update_item' => __( 'Mise à jour Langues' ),
+    'add_new_item' => __( 'Ajouter Langues' ),
+    'new_item_name' => __( 'Ajouter Langues' ),
+'menu_name' => __('Langues'),
+  );
+register_taxonomy('langues', array('hotesses'), array(
+    'hierarchical' => true,
+    'public' => true,
+    'publicly_queryable' => true,
+    'labels' => $labels,
+    'show_in_nav_menus' => true,
+    'show_ui' => true,
+    'show_admin_column' => true,
+    'query_var' => true,
+    'rewrite' => array( 'slug' => 'langues' ),
+  ));
+}
+function lgmcreation_remove_columns( $columns ) {
+
+    // remove the Yoast SEO columns
+    unset( $columns['wpseo-score'] );
+    unset( $columns['wpseo-focuskw'] );
+
+
+    return $columns;
+
+}
+add_filter ('manage_edit-reference_columns', 'lgmcreation_remove_columns' );
+
+
+function lgmcreation_columnfilter($columns){
+    $thumb = array ('thumbail' => 'Image');
+    $columns = array_slice($columns, 0, 1) + $thumb + array_slice($columns, 1, null);
+    return $columns;
+}
+add_action('manage_edit-reference_columns' ,'lgmcreation_columnfilter');
+
+function lgmcreation_column($column){
+    global $post;
+    if($column == 'thumbail'){
+        echo edit_post_link(get_the_post_thumbnail($post->ID, 'thumbnail'),null,null,$post->ID);
+    }
+}
+add_action('manage_posts_custom_column' ,'lgmcreation_column');
+
+add_filter( 'manage_edit-reference_sortable_columns', 'my_movie_sortable_columns' );
+
+function my_movie_sortable_columns( $columns ) {
+    $columns['disponibilites'] = 'disponibilites';
+    return $columns;
+}
+
+?>
