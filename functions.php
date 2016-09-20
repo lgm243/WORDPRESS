@@ -47,7 +47,7 @@ add_filter( 'script_loader_src', 'vc_remove_wp_ver_css_js', 9999 );
 
 /*MENU*/
 register_nav_menus(array(
-'nav' => 'Menu de navigation',
+'main-menu' => 'Menu Principal',
 ));
 
 
