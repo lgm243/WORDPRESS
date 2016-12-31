@@ -10,7 +10,7 @@ $noir: #303030;
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
   zoom: 1;
 }
-
+@import "_version.scss";
 @import "_reset.scss";
 @import "_grid.scss";
 @import "_menu.scss";
