@@ -67,7 +67,7 @@ add_action('admin_head', 'sf_admin_head');
 
 //supprimer fonction dashboard
 function disable_default_dashboard_widgets() {
-    //remove_meta_box('dashboard_right_now', 'dashboard', 'core');
+    remove_meta_box('dashboard_right_now', 'dashboard', 'core');
     remove_meta_box('dashboard_recent_comments', 'dashboard', 'core');
     remove_meta_box('dashboard_incoming_links', 'dashboard', 'core');
     remove_meta_box('dashboard_plugins', 'dashboard', 'core');
