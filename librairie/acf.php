@@ -6,6 +6,7 @@ if( function_exists('acf_add_options_page') ) {
         'menu_title'    => 'ADMINISTRATION',
         'menu_slug'     => 'parametre-acf',
         'capability'    => 'edit_posts',
+        'position'      => '62',
     ));
 
     acf_add_options_sub_page(array(
