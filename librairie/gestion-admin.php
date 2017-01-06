@@ -1,10 +1,8 @@
 <?php
 /**
 * Rôle éditeur
-*Gestion Capacité Eduteur
 **/
- 
- /*Gestion Capacité Eduteur*/
+ /*Gestion Capacité Editeur*/
     function wpcodex_set_editor_capabilities() {
         if (current_user_can('editor')) {
             $editor = get_role( 'editor' );
@@ -26,7 +24,7 @@
     }
     add_action( 'init', 'wpcodex_set_editor_capabilities' );
 
-    /*Suppression menu et sous menu*/
+/*Suppression menu et sous menu*/
     function wpcodex_edit_editor_menu() {
         if( current_user_can('editor')) {
             /*MENU*/
@@ -51,7 +49,7 @@
     }
     add_action( 'wp_before_admin_bar_render', 'wpcodex_edit_adminbar' );
 
-//supprimer dashbord article ... + logo wordpress
+/*supprimer dashbord article ... + logo wordpress*/
 function sf_admin_head() {
     $blog_url = get_bloginfo('url');
     $templ_url = get_bloginfo('template_url');
@@ -65,7 +63,7 @@ function sf_admin_head() {
 }
 add_action('admin_head', 'sf_admin_head');
 
-//supprimer fonction dashboard
+/*supprimer fonction dashboard*/
 function disable_default_dashboard_widgets() {
     remove_meta_box('dashboard_right_now', 'dashboard', 'core');
     remove_meta_box('dashboard_recent_comments', 'dashboard', 'core');
