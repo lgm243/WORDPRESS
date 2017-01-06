@@ -1,69 +1,56 @@
 <?php
-//MISE A JOUR AUTOMATIQUE
-// Activation des màj autos majeures
-add_filter( 'allow_major_auto_core_updates', '__return_true' );
-// Activation des màj autos des plugins
-add_filter( 'auto_update_plugin', '__return_true' );
+/**
+* Rôle éditeur
+*Gestion Capacité Eduteur
+**/
+ 
+ /*Gestion Capacité Eduteur*/
+    function wpcodex_set_editor_capabilities() {
+        if (current_user_can('editor')) {
+            $editor = get_role( 'editor' );
+            // liste des capacités a ajouter.
 
-//supp version wordpress dans le head
-remove_action('wp_head', 'wp_generator');
+            // liste des capacités a retirer.
+            $caps = array(
+            
+                'manage_links'
+               
+            );
 
-//AJOUT MENU APPARENCE ROLE EDITEUR
-function add_theme_caps() {
-    $role = get_role( 'editor' );
-    $role->add_cap( 'edit_theme_options' );
-}
-add_action( 'admin_init', 'add_theme_caps');
-//Remove top level admin menus
-add_action( 'admin_menu', 'remove_admin_menus' );
-add_action( 'admin_menu', 'remove_admin_submenus' );
-
-function remove_admin_menus() {
-    global $current_user;
-    $current_user = wp_get_current_user();
-    if($current_user->user_level < 10){
-        remove_menu_page( 'edit-comments.php' );
-        remove_menu_page( 'link-manager.php' );
-        remove_menu_page( 'tools.php' );
-        remove_menu_page( 'plugins.php' );
-        //remove_menu_page( 'users.php' );
-        remove_menu_page( 'options-general.php' );
-        //remove_menu_page( 'upload.php' );
-        remove_menu_page( 'edit.php' );
-        //remove_menu_page( 'edit.php?post_type=page' );
-        //remove_menu_page( 'themes.php' );
+            foreach ( $caps as $cap ) {
+            
+                // sup.
+                $editor->remove_cap( $cap );
+            }
+        }
     }
-}
+    add_action( 'init', 'wpcodex_set_editor_capabilities' );
 
-//Remove sub level admin menus
-function remove_admin_submenus() {
-    global $current_user;
-    wp_get_current_user();
-    if($current_user->user_level < 10){
-    remove_submenu_page( 'themes.php', 'theme-editor.php' );
-    remove_submenu_page( 'themes.php', 'themes.php' );
-    //remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=post_tag' );
-    //remove_submenu_page( 'edit.php', 'edit-tags.php?taxonomy=category' );
-    //remove_submenu_page( 'edit.php', 'post-new.php' );
-    //remove_submenu_page( 'themes.php', 'nav-menus.php' );
-    remove_submenu_page( 'themes.php', 'widgets.php' );
-    remove_submenu_page( 'themes.php', 'theme-editor.php' );
-    remove_submenu_page( 'plugins.php', 'plugin-editor.php' );
-    remove_submenu_page( 'plugins.php', 'plugin-install.php' );
-    //remove_submenu_page( 'users.php', 'users.php' );
-    remove_submenu_page( 'users.php', 'user-new.php' );
-    //remove_submenu_page( 'upload.php', 'media-new.php' );
-    remove_submenu_page( 'options-general.php', 'options-writing.php' );
-    remove_submenu_page( 'options-general.php', 'options-discussion.php' );
-    remove_submenu_page( 'options-general.php', 'options-reading.php' );
-    remove_submenu_page( 'options-general.php', 'options-discussion.php' );
-    remove_submenu_page( 'options-general.php', 'options-media.php' );
-    remove_submenu_page( 'options-general.php', 'options-privacy.php' );
-    remove_submenu_page( 'options-general.php', 'options-permalinks.php' );
-    remove_submenu_page( 'index.php', 'update-core.php' );
-    remove_action( 'welcome_panel', 'wp_welcome_panel' );
-}
-}
+    /*Suppression menu et sous menu*/
+    function wpcodex_edit_editor_menu() {
+        if( current_user_can('editor')) {
+            /*MENU*/
+            remove_menu_page( 'tools.php' );
+            remove_menu_page( 'themes.php' );
+            remove_menu_page( 'edit-comments.php' );
+            /*SOUSMENU*/
+
+            /*AJOUT NOUVEAU BOUTON MENU*/
+            add_menu_page( 'Menu', 'Menu', 'edit_pages', 'nav-menus.php', '', 'dashicons-menu', 61);
+        }
+    }
+    add_action( 'admin_menu', 'wpcodex_edit_editor_menu' );
+    /*Suppression icone admin*/
+    function wpcodex_edit_adminbar() {
+        if (current_user_can('editor')) {
+            global $wp_admin_bar;
+            $wp_admin_bar->remove_node('customize');
+            $wp_admin_bar->remove_node('comments');
+            $wp_admin_bar->remove_menu('wp-logo');
+        }
+    }
+    add_action( 'wp_before_admin_bar_render', 'wpcodex_edit_adminbar' );
+
 
 
 
