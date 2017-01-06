@@ -95,7 +95,6 @@ function custom_pagination($numpages = '', $pagerange = '', $paged='') {
   }
 }
 
-
 /* GESTION get_header()*/
 remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'rsd_link');
