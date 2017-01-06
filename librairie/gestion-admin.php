@@ -51,9 +51,6 @@
     }
     add_action( 'wp_before_admin_bar_render', 'wpcodex_edit_adminbar' );
 
-
-
-
 //supprimer dashbord article ... + logo wordpress
 function sf_admin_head() {
     $blog_url = get_bloginfo('url');
@@ -67,8 +64,6 @@ function sf_admin_head() {
     </style>';
 }
 add_action('admin_head', 'sf_admin_head');
-
-
 
 //supprimer fonction dashboard
 function disable_default_dashboard_widgets() {
