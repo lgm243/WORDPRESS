@@ -19,10 +19,10 @@
     "gulp-newer": "latest",
     "gulp-plumber": "latest",
     "gulp-rename": "latest",
-    "gulp-sass": "^2.3.2",
+    "gulp-sass": "latest",
     "gulp-sourcemaps": "latest",
-    "gulp-svgstore": "^6.1.0",
-    "gulp-svgmin": "^1.2.3",
-    "gulp-uglify": "latest",
+    "gulp-svgstore": "latest",
+    "gulp-svgmin": "latest",
+    "gulp-uglify": "latest"
   }
 }
