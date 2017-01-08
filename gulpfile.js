@@ -10,9 +10,9 @@ global.browser_support = ["ie >= 9", "ie_mob >= 10", "ff >= 10", "chrome >= 34",
 
 /*REQUIRE*/
 var gulp = require('gulp');
-/*var svgmin = require('gulp-svgmin');*/
+var svgmin = require('gulp-svgmin');
 var rename = require('gulp-rename');
-/*var svgstore = require('gulp-svgstore');*/
+var svgstore = require('gulp-svgstore');
 var cssnano= require('gulp-cssnano');
 var sass= require('gulp-sass');
 var plumber= require('gulp-plumber');
@@ -22,7 +22,6 @@ var newer= require('gulp-newer');
 var add= require('gulp-add-src');
 var concat= require('gulp-concat');
 var uglify= require('gulp-uglify');
-var spritesmith = require('gulp.spritesmith');
 var sourcemaps = require('gulp-sourcemaps');
 var browserSync = require('browser-sync').create();
 var reload      = browserSync.reload;
@@ -51,19 +50,18 @@ gulp.task('js',  function(){
     .pipe(reload({stream: true}));
 });
 
-
-
-/*GENERATION FICHIER SVG
-gulp.task('svg', function () {
-    return gulp.src(path.img+'/svg/*.svg')
-        .pipe(svgmin())
-        .pipe(svgstore())
-        .pipe(rename("sprite.svg"))
-        .pipe(gulp.dest('images/'));
+/*GENERATION FICHIER SVG*/
+gulp.task(‘svg’, function() {
+return gulp.src(path.img+'/svg/*.svg')
+ .pipe(svgmin())
+ .pipe(svgstore())
+ .pipe(rename(‘sprite.svg’))
+ .pipe(gulp.dest('images/'));
 });
-*/
+
+
 /*GENERATION CSS*/
-gulp.task('css', ['sprites'],function(){
+gulp.task('css', function(){
      return gulp.src(path.scss+'*.scss')
     .pipe(plumber({errorHandler: onError}))
     .pipe(sourcemaps.init())
@@ -84,24 +82,7 @@ gulp.task('css', ['sprites'],function(){
     .pipe(gulp.dest('./'))
     .pipe(reload({stream: true}));
 });
-/*icone sprite png*/
-gulp.task('sprites', function(){
-     var opts;
-     var spriteData;
-    spriteData = null;
-    opts = {optimizationLevel: 5, progressive: true, interlace: true };
-    var sprite = gulp.src(path.img+'/ico/*.png')
-    .pipe(plumber({errorHandler: onError}))
-    .pipe(newer(path.img+'/ico/*.png'))
-    .pipe(spritesmith({
-        imgName: 'sprite.png',
-        cssName: '_sprite.scss',
-        cssTemplate: path.scss+'tools/_sprite.scss.mustache'
-   } ));
-    sprite.img.pipe(gulp.dest('images/'));
-    sprite.css.pipe(gulp.dest(path.scss));
-    return sprite;
-});
+
 /*GENERATION IMG*/
 gulp.task('img',function(){
     opts = {optimizationLevel: 5, progressive: true, interlace: true };
@@ -125,8 +106,3 @@ gulp.task('watch', ['img','css','js'], function() {
     gulp.watch(path.img+'/*.*',['img']).on('change', reload);
     gulp.watch("*.php").on('change', reload);
 });
-
-
-
-
-
