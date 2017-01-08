@@ -51,11 +51,11 @@ gulp.task('js',  function(){
 });
 
 /*GENERATION FICHIER SVG*/
-gulp.task(‘svg’, function() {
+gulp.task('svg', function(){
 return gulp.src(path.img+'/svg/*.svg')
  .pipe(svgmin())
  .pipe(svgstore())
- .pipe(rename(‘sprite.svg’))
+ .pipe(rename('sprite.svg'))
  .pipe(gulp.dest('images/'));
 });
 
@@ -95,7 +95,7 @@ gulp.task('img',function(){
 
 /*WATCH*/
 
-gulp.task('watch', ['img','css','js'], function() {
+gulp.task('watch', ['img','css','svg','js'], function() {
     browserSync.init(null, {
         proxy : "localhost:8888/agexia",
         debugInfo: true,
