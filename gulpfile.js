@@ -97,7 +97,7 @@ gulp.task('img',function(){
 
 gulp.task('watch', ['img','css','svg','js'], function() {
     browserSync.init(null, {
-        proxy : "localhost:8888/agexia",
+        proxy : "localhost:8888/nouveausite",
         debugInfo: true,
         open: true
     });
