@@ -10,5 +10,6 @@ Template Name: page-accueil
 ?>
 <?php if ( $large_image_url ) : ?>
 <div class="fond" style="background-image:url(<?php  echo $large_image_url[0] ?>);">
-    
+</div>
+<?php endif; ?>
 <?php get_footer(); ?>
